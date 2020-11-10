@@ -1,0 +1,105 @@
+#include<forward_list>
+#include<algorithm>
+#include<iostream>
+#include<iterator>
+#include<iomanip>
+#include<sstream>
+#include<fstream>
+#include<istream>
+#include<utility>
+#include<vector>
+#include<stack>
+#include<cmath>
+#include<queue>
+#include<deque>
+#include<list>
+#include<map>
+#include<set>
+#include<bitset>
+#include<unordered_map>
+#define NinjaTurtle 
+#define outfile freopen("strings.in", "w", stdout);
+#define infile freopen("strings.in", "r", stdin);
+#define all(v) v.begin(),v.end()
+#define _CRT_sECURE_NO_WARNINGs
+#define YES cout << "YES\n";
+#define NO cout << "NO\n";
+#define ll long long
+#define endl "\n"
+#define vl vector<long long>
+#define vi vector<int>
+#define vs vector<string>
+#define vb vector<bool>
+#define vp vector<pair<int,int>>
+#define Pb push_back
+#define on first
+#define tw second
+#define P pair<int,int>
+#define Bug cout<<"TEST\n";
+#define MS(o,k) memset(o,k,sizeof o)
+#define OO 1e9
+using namespace std;
+int n, m, in;
+char grid[101][101];
+vector<vi> vis(101,vi(101,0));
+int indx=1,X,Y;
+bool loop=0;
+bool valid(int x, int y)
+{
+	return (x <= n)&& (y <= m) && x > 0 && y > 0;
+}
+void solve(int x, int y)
+{
+	if (!valid(x, y))
+		return;
+	if (vis[x][y])
+	{
+		loop = 1; X = x, Y = y;
+		return;
+	}
+	vis[x][y] = indx++;
+	if (grid[x][y] == 'N')solve(x - 1, y);
+	if (grid[x][y] == 'S')solve(x + 1, y);
+	if (grid[x][y] == 'E')solve(x , y+1);
+	if (grid[x][y] == 'W')solve(x , y-1);
+}
+int main()
+{
+
+	/*https://onlinejudge.org/index.php?option=onlinejudge&Itemid=8&page=show_problem&problem=1057&fbclid=IwAR1EhAbuDpwz0N_QsFHl06-f6sA2S89VYOKl3gjXVfcgCliC-OH8fU3f7js*/
+	NinjaTurtle
+		while (true)
+		{
+
+			cin >> n >> m >> in;
+			if (n == m && m == in && in == 0)
+				break;
+			bool f = 1;
+			for (int i = 1; i <= n; i++)
+			for (int j = 1; j <= m; j++){
+				cin >> grid[i][j];
+			}
+			loop = 0;
+			vis = vector<vi>(101, vi(101, 0));
+			indx = 1;
+			solve(1, in);
+			if (loop)
+			{
+				cout << vis[X][Y] - 1 << " step(s) before a loop of " << indx - vis[X][Y] << " step(s)\n";
+			}
+			else
+				cout << indx - 1 << " step(s) to exit\n";
+		}
+}
+/*
+4 5 1
+SESWE
+EESNW
+NWEEN
+EWSEN
+1	11  10
+2 3 4 9	8
+	5 6 7 
+*/
+
+
