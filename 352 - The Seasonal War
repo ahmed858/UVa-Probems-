@@ -1,0 +1,104 @@
+#include<forward_list>
+#include<algorithm>
+#include<iostream>
+#include<iterator>
+#include<iomanip>
+#include<sstream>
+#include<fstream>
+#include<istream>
+#include<utility>
+#include<vector>
+#include<stack>
+#include<cmath>
+#include<queue>
+#include<deque>
+#include<list>
+#include<map>
+#include<set>
+#include<bitset>
+#include<unordered_map>
+#include<cstdio>
+#include <cstring>
+#define NinjaTurtle 
+#define outfile freopen("strings.in", "w", stdout);
+#define infile freopen("strings.in", "r", stdin);
+#define all(v) v.begin(),v.end()
+#define _CRT_sECURE_NO_WARNINGs
+#define YES cout << "YES\n";
+#define NO cout << "NO\n";
+#define ll long long
+#define endl "\n"
+#define vl vector<long long>
+#define vi vector<int>
+#define vs vector<string>
+#define vb vector<bool>
+#define vp vector<pair<int,int>>
+#define Pb push_back
+#define on first
+#define tw second
+#define P pair<int,int>
+#define Bug cout<<"TEST\n";
+#define MS(o,k) memset(o,k,sizeof o)
+#define OO 1e9
+using namespace std;
+int n;
+vector<vector<char>>photo;
+vector<vb> vis;
+bool valid(int x, int y)
+{
+	return (x <= n) && (y <= n) && x > 0 && y > 0;
+}
+void DFS(int x, int y)
+{
+	if (!valid(x, y)|| photo[x][y]=='0'|| vis[x][y])
+		return;
+	vis[x][y] = 1;
+	DFS(x - 1, y);
+	DFS(x + 1, y);
+	DFS(x, y + 1);
+	DFS(x, y - 1);
+
+	DFS(x - 1, y - 1);
+	DFS(x + 1, y + 1);
+	DFS(x - 1, y + 1);
+	DFS(x + 1, y - 1);
+
+
+}
+int main()
+{
+
+	
+	NinjaTurtle
+		int x=1; 
+		while (cin >> n)
+		{
+				photo = vector<vector<char>>(1001, vector<char>(1001));
+				vis = vector<vector<bool>>(1001, vector<bool>(1001));
+				
+				for (int i = 1; i <= n; i++)
+				{
+					for (int j = 1; j <= n; j++)
+						cin >> photo[i][j];
+				}
+				int ans = 0;
+				for (int i = 1; i <= n; i++)
+				{
+					for (int j = 1; j <= n; j++)
+
+						if (!vis[i][j]&&photo[i][j]=='1')
+						{
+							ans++;
+							DFS(i, j);
+						}
+				}
+				cout << "Image number " << x++<<" contains " << ans << " war eagles." << endl;
+				
+		}
+		
+}
+/*
+https://onlinejudge.org/index.php?option=onlinejudge&page=show_problem&problem=288&fbclid=IwAR2EpWI3RLiqqKvDaScK_os3pS1Mzwl1BYkDOqzFZ_qnAj0q3EHyMdGPP00
+*/
+
+
