@@ -1,0 +1,99 @@
+#include<forward_list>
+#include<algorithm>
+#include<iostream>
+#include<iterator>
+#include<iomanip>
+#include<sstream>
+#include<fstream>
+#include<istream>
+#include<utility>
+#include<vector>
+#include<stack>
+#include<cmath>
+#include<queue>
+#include<deque>
+#include<list>
+#include<map>
+#include<set>
+#include<bitset>
+#include<unordered_map>
+#include<cstdio>
+#include <cstring>
+#define NinjaTurtle 
+#define outfile freopen("strings.in", "w", stdout);
+#define infile freopen("strings.in", "r", stdin);
+#define all(v) v.begin(),v.end()
+#define _CRT_sECURE_NO_WARNINGs
+#define YES cout << "YES\n";
+#define NO cout << "NO\n";
+#define ll long long
+#define endl "\n"
+#define vl vector<long long>
+#define vi vector<int>
+#define vs vector<string>
+#define vb vector<bool>
+#define vp vector<pair<int,int>>
+#define Pb push_back
+#define on first
+#define tw second
+#define P pair<int,int>
+#define Bug cout<<"TEST\n";
+#define MS(o,k) memset(o,k,sizeof o)
+#define OO 1e9
+using namespace std;
+int m, n,r,c,w,u,v;
+// memoization
+vi adj, memo;
+vb vis;
+int DFS(int source)
+{
+	vis[source] = 1;
+	int path = 0;
+	if (adj[source] != 0 && !vis[adj[source]])
+		path += 1 + DFS( adj[source]);
+	vis[source] = 0;
+	return memo[source] = path;
+}
+int main()
+{
+
+	
+	NinjaTurtle
+		int t,x=1; cin >> t;
+		while (x<=t)
+		{
+			adj = vi(50005,0);
+			vis = vb(50005, 0);
+			memo = vi(50005, -1);
+
+			cin >> n;
+			for (int i = 0; i < n; i++)
+			{
+				cin >> u >> v;
+				
+				adj[u] = v;
+			}
+			int ans = 0;
+			int mx = -1;
+			vp v;
+			for (int i = 1; i <= n; i++)
+			{
+				
+				/* if i not count this go count.. */
+			if(memo[i]==-1)	DFS(i);
+
+			if (memo[i] > mx)
+				mx = memo[i],ans=i;
+
+
+			}
+			cout << "Case " << x++ << ": " << ans<<  endl;
+			
+		}
+		
+}
+/*
+https://onlinejudge.org/index.php?option=com_onlinejudge&Itemid=8&page=show_problem&category=0&problem=3873&mosmsg=Submission+received+with+ID+25712773
+*/
+
+
