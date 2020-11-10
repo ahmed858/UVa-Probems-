@@ -1,0 +1,135 @@
+#include<forward_list>
+#include<algorithm>
+#include<iostream>
+#include<iterator>
+#include<iomanip>
+#include<sstream>
+#include<fstream>
+#include<istream>
+#include<utility>
+#include<vector>
+#include<stack>
+#include<cmath>
+#include<queue>
+#include<deque>
+#include<list>
+#include<map>
+#include<set>
+#include<bitset>
+#include<unordered_map>
+#include<cstdio>
+#include <cstring>
+#define NinjaTurtle 
+#define outfile freopen("strings.in", "w", stdout);
+#define infile freopen("strings.in", "r", stdin);
+#define all(v) v.begin(),v.end()
+#define _CRT_sECURE_NO_WARNINGs
+#define YES cout << "YES\n";
+#define NO cout << "NO\n";
+#define ll long long
+#define endl "\n"
+#define vl vector<long long>
+#define vi vector<int>
+#define vs vector<string>
+#define vb vector<bool>
+#define vp vector<pair<int,int>>
+#define Pb push_back
+#define on first
+#define tw second
+#define P pair<int,int>
+#define Bug cout<<"TEST\n";
+#define MS(o,k) memset(o,k,sizeof o)
+#define OO 1e9
+using namespace std;
+int m, n,r,c,w,u,v;
+int dx[8];
+int dy[8];
+bool vis[101][101],grid[101][101];
+int ans[101][101];
+bool valid(int x, int y)
+{
+	return (x < r)&& (y < c) && x >= 0 && y >= 0&&!(grid[x][y]);
+}
+void DFS(int x, int y)
+{
+	if (vis[x][y] == 1)
+		return;
+	vis[x][y] = true;
+	for (int i = 0; i < 8; i++)
+	{
+		if (valid(x + dx[i], y + dy[i]))
+		{
+			ans[x + dx[i]][y + dy[i]]++;
+			DFS(x + dx[i],y + dy[i]);
+		}
+	}
+}
+int main()
+{
+
+	
+	NinjaTurtle
+		int t,x=1; cin >> t;
+		while (x<=t)
+		{
+			memset(vis, false, sizeof vis);
+			memset(grid, 0, sizeof grid);
+			memset(ans, 0, sizeof ans);
+			cin >> r >> c >> m >> n;
+			dx[0] = dx[1] = -m;
+			dx[2] = dx[3] = m;
+			dy[0] = dy[2] = -n;
+			dy[1] = dy[3] = n;
+			dx[4] = dx[5] = -n;
+			dx[6] = dx[7] = n;
+			dy[4] = dy[6] = -m;
+			dy[5] = dy[7] = m;
+			cin >> w;
+			while (w--)
+			{
+				cin >> u >> v;
+				grid[u][v] = 1;
+			}
+			
+			DFS(0, 0);
+			/*for (int i = 0; i < r; i++)
+			{
+				for (int j = 0; j < c; j++)
+				{
+
+					cout << grid[i][j] << " ";
+				}
+				cout << endl;
+
+			}*/
+			int even = 0, odd = 0;
+			for (int i = 0; i < r; i++)
+			{
+				for (int j = 0; j < c; j++)
+				{
+        /*this is to spichal cases n=0,m=0,n=m*/
+					if (m == 0 || n == 0 || m == n) {
+					ans[i][j] /= 2;
+					}
+					/*not understand this for what ?? (!i && !j)*/
+					if (ans[i][j] || (!i && !j))
+					{
+						if (ans[i][j] % 2 == 0)
+							even++;
+						else if (ans[i][j] % 2 != 0 )
+							odd++;
+					}
+				}
+				
+			}
+			cout << "Case " << x << ": " << even << " " << odd<< endl;
+			x++;
+			
+		}
+		
+}
+/*
+https://onlinejudge.org/index.php?option=onlinejudge&Itemid=99999999&page=show_problem&category=0&problem=3057&mosmsg=Submission+received+with+ID+25711788
+*/
+
+
