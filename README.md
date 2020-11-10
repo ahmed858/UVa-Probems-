@@ -1,0 +1,133 @@
+# UVa-Probems-
+#include<forward_list>
+#include<algorithm>
+#include<iostream>
+#include<iterator>
+#include<iomanip>
+#include<sstream>
+#include<fstream>
+#include<istream>
+#include<utility>
+#include<vector>
+#include<stack>
+#include<cmath>
+#include<queue>
+#include<deque>
+#include<list>
+#include<map>
+#include<set>
+#include<bitset>
+#include<unordered_map>
+#define NinjaTurtle 
+#define outfile freopen("strings.in", "w", stdout);
+#define infile freopen("strings.in", "r", stdin);
+#define all(v) v.begin(),v.end()
+#define _CRT_sECURE_NO_WARNINGs
+#define YES cout << "YES\n";
+#define NO cout << "NO\n";
+#define ll long long
+#define endl "\n"
+#define vl vector<long long>
+#define vi vector<int>
+#define vs vector<string>
+#define vb vector<bool>
+#define vp vector<pair<int,int>>
+#define Pb push_back
+#define on first
+#define tw second
+#define P pair<int,int>
+#define Bug cout<<"TEST\n";
+#define MS(o,k) memset(o,k,sizeof o)
+#define OO 1e9
+using namespace std;
+int n, m, sz;
+string s;
+char grid[101][101];
+int dir=-1,X,Y,st=0;
+bool valid(int x, int y)
+{
+	return (x <= n)&& (y <= m) && x > 0 && y > 0;
+}
+int main()
+{
+		// link in UVa
+	/*https://onlinejudge.org/index.php?option=onlinejudge&Itemid=8&page=show_problem&problem=2931&fbclid=IwAR1Qus7jOnf2HYTS43AYxh6tCSoHwYT42JRVqXrfwrPTzhfPNgDmcQeI32E*/
+
+	NinjaTurtle
+		while (true)
+		{
+
+			cin >> n >> m >> sz;
+			if (n == m && m == sz && sz == 0)
+				break;
+			bool f = 1;
+			dir = -1;
+			for (int i = 1; i <= n; i++)
+			for (int j = 1; j <= m; j++){
+				cin >> grid[i][j];
+				if (grid[i][j] == 'N')dir = 1;
+				if (grid[i][j] == 'O')dir = 0;
+				if (grid[i][j] == 'S')dir = 3;
+				if (grid[i][j] == 'L')dir = 2;
+
+				if (dir != -1 && f)
+					X = i, Y = j, f = 0;
+			}
+			cin >> s;
+			st = 0;
+			for (int i = 0; i < sz; i++)
+			{
+				if (s[i] == 'F')
+				{
+					if (dir == 0)
+						if (valid(X, Y - 1) && grid[X][Y - 1] != '#')
+						{
+
+							Y--;
+							if (grid[X][Y] == '*')st++,grid[X][Y]='.';
+						}
+
+
+
+					if (dir == 1)if (valid(X - 1, Y) && grid[X - 1][Y] != '#')
+					{
+
+						X--;
+						if (grid[X][Y] == '*')st++, grid[X][Y] = '.';
+
+					}
+					if (dir == 2)
+						if (valid(X, Y + 1) && grid[X][Y + 1] != '#')
+						{
+							Y++;					
+							if (grid[X][Y] == '*')st++, grid[X][Y] = '.';
+
+
+						}
+					if (dir == 3)if (valid(X + 1, Y) && grid[X + 1][Y] != '#')
+					{
+						X++; 				
+						if (grid[X][Y] == '*')st++, grid[X][Y] = '.';
+
+					}
+
+				}
+				else if (s[i] == 'D')
+				{
+					dir++;
+					dir %= 4;
+				}
+				else
+				{
+					dir--;
+					if (dir == -1)dir = 3;
+				}
+				
+			}
+			cout << st << endl;
+
+		}
+}
+
+
+
