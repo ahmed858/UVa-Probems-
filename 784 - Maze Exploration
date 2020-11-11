@@ -1,0 +1,102 @@
+#include<forward_list>
+#include<algorithm>
+#include<iostream>
+#include<iterator>
+#include<iomanip>
+#include<sstream>
+#include<fstream>
+#include<istream>
+#include<utility>
+#include<vector>
+#include<stack>
+#include<cmath>
+#include<queue>
+#include<deque>
+#include<list>
+#include<map>
+#include<set>
+#include<bitset>
+#include<unordered_map>
+#include<cstdio>
+#include <cstring>
+#include <cstdio>
+#define NinjaTurtle ios_base::sync_with_stdio(false);cin.tie(NULL); cout.tie(NULL);
+#define outfile freopen("strings.in", "w", stdout);
+#define infile freopen("strings.in", "r", stdin);
+#define all(v) v.begin(),v.end()
+#define _CRT_sECURE_NO_WARNINGs
+#define YES cout << "YES\n";
+#define NO cout << "NO\n";
+#define ll long long
+#define endl "\n"
+#define vl vector<long long>
+#define vi vector<int>
+#define vs vector<string>
+#define vb vector<bool>
+#define vp vector<pair<int,int>>
+#define Pb push_back
+#define on first
+#define tw second
+#define P pair<int,int>
+#define Bug cout<<"TEST\n";
+#define MS(o,k) memset(o,k,sizeof o)
+#define OO 1e9
+using namespace std;
+int X, Y;
+vs grid;
+bool valid(int x, int y)
+{
+	return (x < grid.size()) && (y < grid[x].size()) && (x >= 0) && (y >= 0) && (grid[x][y] == ' ');
+}
+void DFS(int x, int y)
+{
+	if (!valid(x, y))
+		return;
+
+	grid[x][y] = '#';
+	DFS(x - 1, y);
+	DFS(x + 1, y);
+	DFS(x, y + 1);
+	DFS(x, y - 1);
+
+
+}
+int main()
+{
+	NinjaTurtle
+		int t;
+	cin >> t;
+	//
+	cin.ignore();
+	while (t--)
+	{
+
+		while (1)
+		{
+			string s;
+			getline(cin, s);
+			grid.push_back(s);
+			if (s.find('_')!=string::npos)break;
+		}
+		bool ok = 1;
+		for (int i = 0; ok && i<grid.size(); i++)
+			for (int j = 0; ok &&j< grid[i].size(); j++)
+				if (grid[i][j] == '*')
+					X = i, Y = j,
+					ok = 0;
+		grid[X][Y] = ' ';
+		DFS(X, Y);
+		for (int i = 0; i < grid.size(); i++)
+		{
+			cout<<grid[i] << endl;
+		}
+		//if (t == 0)cout << endl;
+		grid.clear();
+	}
+
+}
+/*
+https://onlinejudge.org/index.php?option=com_onlinejudge&Itemid=8&page=show_problem&problem=725
+*/
+
+
