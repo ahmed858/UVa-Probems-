@@ -1,0 +1,99 @@
+#include<forward_list>
+#include<algorithm>
+#include<iostream>
+#include<iterator>
+#include<iomanip>
+#include<sstream>
+#include<fstream>
+#include<istream>
+#include<utility>
+#include<vector>
+#include<stack>
+#include<cmath>
+#include<queue>
+#include<deque>
+#include<list>
+#include<map>
+#include<set>
+#include<bitset>
+#include<unordered_map>
+#include<cstdio>
+#include <cstring>
+#include <cstdio>
+#define NinjaTurtle ios_base::sync_with_stdio(false);cin.tie(NULL); cout.tie(NULL);
+#define outfile freopen("strings.in", "w", stdout);
+#define infile freopen("strings.in", "r", stdin);
+#define all(v) v.begin(),v.end()
+#define _CRT_sECURE_NO_WARNINGs
+#define YES cout << "YES\n";
+#define NO cout << "NO\n";
+#define ll long long
+#define endl "\n"
+#define vl vector<long long>
+#define vi vector<int>
+#define vs vector<string>
+#define vb vector<bool>
+#define vp vector<pair<int,int>>
+#define Pb push_back
+#define on first
+#define tw second
+#define P pair<int,int>
+#define Bug cout<<"TEST\n";
+#define MS(o,k) memset(o,k,sizeof o)
+#define OO 1e9
+using namespace std;
+int X,Y;
+vs grid;
+//vector<vb> vis;
+bool valid(int x, int y)
+{
+	return (x <grid.size()) && (y <grid[0].size()) && (x >= 0) && (y >= 0)&& (grid[x][y] == '0');
+}
+int ans=0;
+void DFS(int x, int y)
+{
+	if (!valid(x, y))
+		return;
+
+	grid[x][y] = '1';
+	//grid[x][y] = '1';
+	ans++;
+	DFS(x - 1, y);
+	DFS(x + 1, y);
+	DFS(x, y + 1);
+	DFS(x, y - 1);
+
+
+}
+int main()
+{
+	NinjaTurtle
+		int t, x = 1;
+	cin >> t;
+	while (x <= t)
+	{
+		ans = 0;
+		//vis = vector<vb>(101, vb(101, 0));
+		cin >> X >> Y;
+		string s;
+		getchar();
+		while (getline(cin,s)and (!s.empty()))
+		{
+			
+			grid.push_back(s);
+
+		}
+	
+		DFS(X-1, Y-1);
+		cout << ans << endl;
+		if (x < t)cout << endl;
+		x++;
+		grid.clear();
+	}
+}
+/*
+
+
+*/
+
+
