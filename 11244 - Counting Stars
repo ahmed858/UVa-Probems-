@@ -1,0 +1,111 @@
+#include<forward_list>
+#include<algorithm>
+#include<iostream>
+#include<iterator>
+#include<iomanip>
+#include<sstream>
+#include<fstream>
+#include<istream>
+#include<utility>
+#include<vector>
+#include<stack>
+#include<cmath>
+#include<queue>
+#include<deque>
+#include<list>
+#include<map>
+#include<set>
+#include<bitset>
+#include<unordered_map>
+#include<cstdio>
+#include <cstring>
+#include <cstdio>
+#define NinjaTurtle ios_base::sync_with_stdio(false);cin.tie(NULL); cout.tie(NULL);
+#define outfile freopen("strings.in", "w", stdout);
+#define infile freopen("strings.in", "r", stdin);
+#define all(v) v.begin(),v.end()
+#define _CRT_sECURE_NO_WARNINGs
+#define YES cout << "YES\n";
+#define NO cout << "NO\n";
+#define ll long long
+#define endl "\n"
+#define vl vector<long long>
+#define vi vector<int>
+#define vs vector<string>
+#define vb vector<bool>
+#define vp vector<pair<int,int>>
+#define Pb push_back
+#define on first
+#define tw second
+#define P pair<int,int>
+#define Bug cout<<"TEST\n";
+#define MS(o,k) memset(o,k,sizeof o)
+#define OO 1e9
+using namespace std;
+int X, Y,n,m;
+char ch;
+char grid[501][501];
+bool v[501][501];
+bool valid(int x, int y)
+{
+	return x < n && y<m&& y>=0&&(x >= 0)  && (v[x][y] == false) &&(grid[x][y]=='*');
+}
+int ans  ,cnt;
+void DFS(int x, int y)
+{
+	if (!valid(x, y))
+		return;
+
+	v[x][y] = 1;
+	cnt++;
+	DFS(x - 1, y);
+	DFS(x + 1, y);
+	DFS(x, y + 1);
+	DFS(x, y - 1);
+	DFS(x + 1, y + 1);
+	DFS(x - 1, y - 1);
+	DFS(x + 1, y - 1);
+	DFS(x - 1, y + 1);
+
+}
+int main()
+{
+	NinjaTurtle
+		while (cin >> n >> m)
+		{
+			if (n == m && m == 0)
+				break;
+			for (int i = 0; i < 101; i++)
+				for (int j = 0; j < 101; j++)
+					v[i][j] = 0;
+
+			for (int i = 0; i < 101; i++)
+				for (int j = 0; j < 101; j++)
+					grid[i][j] = '\0';
+
+			for (int i = 0; i < n; i++)
+				cin >> grid[i];
+
+			ans = 0;
+			for (int i = 0; i < n; i++)
+				for (int j = 0; j < m; j++)
+				{
+					cnt = 0;
+				
+						DFS(i, j);
+					//cout << cnt << endl;
+					if (cnt==1)
+						ans++;
+
+
+					
+				}
+			cout << ans << endl;
+			
+		}
+}
+/*
+https://onlinejudge.org/index.php?option=onlinejudge&Itemid=8&page=show_problem&problem=2201&fbclid=IwAR2dVd1rQwd0hzah8GLzr8eHgnsl8auFSN6oACJGSCatrYVncIkO96L9hAE
+*/
+
+
