@@ -1,0 +1,75 @@
+#include<bits/stdc++.h>
+
+
+#define ll				    long long
+#define all(v)			    v.begin(),v.end()
+#define allr(v)			    v.rbegin(),v.rend()
+#define YES				    cout << "YES\n";
+#define NO				    cout << "NO\n";
+#define endl			    "\n"
+#define vi				    vector<int>
+#define vl				    vector<ll>
+#define wach(x)			    cerr<<(#x)<<" = ("<<(x)<<")"<<"\n"
+#define RT(v)			    return cout<<v,0
+#define sz(x)			    x.size()
+#define pii					pair<int,int>
+
+using namespace std;
+const ll mod = 1e9 + 7;
+const double EPS = 1e-10;
+const double pi = 3.14159265358979323846;
+void fast()
+{
+	ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL);
+}
+void solve() {
+int k, n;
+	while (cin >> k >> n)
+	{
+		if (n == 0 && k == 0)
+			break;
+		vi v(n), seq;
+		for (int& i : v)
+			cin >> i;
+		map<vector<int>, int >mp;
+		for (int mask = 0; mask < (1 << n); mask++)
+		{
+			ll sum = 0;
+			seq = vi();
+			for (int idx = 0; idx < n; idx++)
+			{
+				if ((mask >> idx) & 1)
+				{
+					seq.push_back(v[idx]);
+					sum += v[idx];
+				}
+			}
+			if (sum==k)
+				mp[seq]++;
+		}
+		//Sums of 4:
+		cout << "Sums of " << k << ":\n";
+		if (!sz(mp))
+			cout << "NONE\n";
+		else
+		{
+			auto vec = mp.rbegin();
+			for ( ;vec!=mp.rend();vec++)
+			{
+				for (int i = 0; i < sz(vec->first) - 1; i++)
+					cout << vec->first[i] << "+";
+				cout << vec->first[sz(vec->first) - 1] << endl;;
+			}
+		}
+	}
+}
+int main()
+{
+	fast();
+	
+		solve();
+	
+}
+/*
+codeforces.com/group/1TdLPPqeAc/contests
+*/
